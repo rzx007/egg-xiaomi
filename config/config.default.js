@@ -29,9 +29,15 @@ module.exports = appInfo => {
       '.html': 'ejs',
     },
   };
+  // token密钥
+  config.jwt = {
+    cert: 'huanggegehaoshuai', // jwt秘钥
+  };
   // add your middleware config here
-  config.middleware = [];
-
+  config.middleware = [ 'auth' ];
+  config.auth = {
+    match: '/admin',
+  };
   // add your user config here
   const userConfig = {
     // myAppName: 'egg',

@@ -4,7 +4,8 @@ module.exports = app => {
 
   // 后台
   router.get('/login', controller.admin.login.index);
-
+  router.post('/doLogin', controller.admin.login.doLogin);
+  router.get('/admin/getCaptcha', controller.admin.login.getCaptcha); // 获取验证码
   router.get('/admin/manager', controller.admin.manager.index);
   router.get('/admin/manager/add', controller.admin.manager.add);
   router.get('/admin/manager/edit', controller.admin.manager.edit);
