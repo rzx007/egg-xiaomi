@@ -1,6 +1,6 @@
 'use strict';
 
-const { Controller } = require('egg');
+const Controller = require('./baseController.js');
 class LoginController extends Controller {
   async index() {
     const { ctx } = this;
@@ -25,7 +25,7 @@ class LoginController extends Controller {
     if (isCaptchaVail) {
       const userData = await ctx.service.admin.login.doLogin(username, ctx.helper.md5(password));
       console.log(userData);
-      if (userData) {
+      if (userData.length>0) {
         ctx.session.userinfo = userData[0]; // 设置 Session
         ctx.rotateCsrfSecret(); // 调用 rotateCsrfSecret 刷新用户的 CSRF token
         ctx.redirect('/admin/manager');
@@ -37,11 +37,11 @@ class LoginController extends Controller {
         ctx.helper.success({ ctx, data });*/
       } else {
         // ctx.helper.error({ ctx, msg: '用户名或密码错误' });
-        await ctx.error('/login', '用户名或密码错误');
+        await this.error('/login', '用户名或密码错误');
       }
     } else {
       // ctx.helper.error({ ctx, msg: '验证码错误' });
-      await ctx.error('/login', '验证码错误');
+      await this.error('/login', '验证码错误');
     }
   }
   async loginOut() {

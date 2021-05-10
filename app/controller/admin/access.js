@@ -1,7 +1,7 @@
 
 'use strict';
 
-const Controller = require('egg').Controller;
+const Controller = require('./baseController.js');
 
 class RoleController extends Controller {
   async index() {

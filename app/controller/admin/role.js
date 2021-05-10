@@ -1,7 +1,7 @@
 
 'use strict';
 
-const Controller = require('egg').Controller;
+const Controller = require('./baseController.js');
 
 class RoleController extends Controller {
   async index() {
@@ -24,13 +24,13 @@ class RoleController extends Controller {
     // console.log(ctx.request.body);
     const row = ctx.request.body;
     await ctx.service.admin.role.roleAdd(row);
-    await ctx.success('/admin/role', '新增角色成功');
+    await this.success('/admin/role', '新增角色成功');
   }
   async updateRole() {
     const { ctx } = this;
     const row = ctx.request.body;
     await ctx.model.Role.findOneAndUpdate({ _id: row._id }, row);
-    await ctx.success('/admin/role', '新增角成功');
+    await this.success('/admin/role', '新增角成功');
   }
   async delete() {
     const { ctx } = this;
