@@ -4,8 +4,10 @@ const { Service } = require('egg');
 const jwt = require('jsonwebtoken');
 
 class LoginService extends Service {
-  doLogin() {
-    return 'success';
+  async doLogin(username, password) {
+    const { ctx } = this;
+    const data = await ctx.model.Admin.find({ username, password });
+    return data;
   }
   //  验证码通过后，登陆操作
   async login(user, password) {

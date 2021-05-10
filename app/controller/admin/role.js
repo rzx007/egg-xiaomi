@@ -6,7 +6,8 @@ const Controller = require('egg').Controller;
 class RoleController extends Controller {
   async index() {
     const { ctx } = this;
-    await ctx.render('admin/role/index', { data: '角色列表' });
+    const data = await ctx.model.Role.find();
+    await ctx.render('admin/role/index', { data });
   }
   async add() {
     const { ctx } = this;
@@ -14,7 +15,22 @@ class RoleController extends Controller {
   }
   async edit() {
     const { ctx } = this;
-    await ctx.render('admin/role/edit', { data: '角色编辑' });
+    const id = ctx.query.id;
+    const data = await ctx.model.Role.find({ _id: id });
+    await ctx.render('admin/role/edit', { data: data[0] });
+  }
+  async addRole() {
+    const { ctx } = this;
+    // console.log(ctx.request.body);
+    const row = ctx.request.body;
+    await ctx.service.admin.role.roleAdd(row);
+    await ctx.success('/admin/role', '新增角色成功');
+  }
+  async updateRole() {
+    const { ctx } = this;
+    const row = ctx.request.body;
+    await ctx.model.Role.findOneAndUpdate({ _id: row._id }, row);
+    await ctx.success('/admin/role', '新增角成功');
   }
   async delete() {
     const { ctx } = this;

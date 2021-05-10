@@ -38,6 +38,12 @@ module.exports = appInfo => {
   config.auth = {
     match: '/admin',
   };
+  config.mongoose = {
+    url: 'mongodb://eggadmin:123456@127.0.0.1/egg',
+    options: {
+      useUnifiedTopology: true,
+    },
+  };
   // add your user config here
   const userConfig = {
     // myAppName: 'egg',

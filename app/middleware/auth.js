@@ -1,21 +1,22 @@
 'use strict';
+const url = require('url');
 const jwt = require('jsonwebtoken');
 module.exports = () => {
-  return async function auth(ctx, next) {
-    try {
+  return async function auth(ctx, next) { 
+    /* const decode = jwt.verify(ctx.get('Authorization'), ctx.app.config.jwt.cert);
+        ctx.userId = decode.id;*/
+    if (ctx.session.userinfo) {
+      ctx.state.userinfo = ctx.session.userinfo; // 全局变量
+      await next();
+    } else {
+      // 排除不需要做权限判断的页面  /admin/verify?mt=0.7466881301614958
       const ignoreUrl = [ '/login', '/admin/getCaptcha', '/doLogin' ];
-      const pathName = ctx.request.url;
+      const pathName = url.parse(ctx.request.url).pathname;
       if (ignoreUrl.includes(pathName)) {
-        await next(); // 这里因为next之后的操作是异步的所以需要加 await
+        await next();
       } else {
-        const decode = jwt.verify(ctx.get('Authorization'), ctx.app.config.jwt.cert);
-        ctx.userId = decode.id;
-        await next(); // 这里因为next之后的操作是异步的所以需要加 await
+        ctx.redirect('/login');
       }
-    } catch (err) {
-      console.log(err);
-      ctx.redirect('/login');
-      return;
     }
   };
 };
