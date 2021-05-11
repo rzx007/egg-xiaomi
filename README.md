@@ -2,6 +2,7 @@
 
 inspiration from  xiaomi offical shooping website by eggjs 
 
+[egg-mongoose快速上手](https://www.jianshu.com/p/eaf51d9e3630)
 ## QuickStart
 
 <!-- add docs here for user -->
@@ -31,3 +32,4 @@ $ npm stop
 
 
 [egg]: https://eggjs.org
+

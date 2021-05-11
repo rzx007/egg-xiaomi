@@ -1,3 +1,9 @@
+/*
+ * @Author: rzx007
+ * @Date: 2021-05-11 10:57:38
+ * @Last Modified by: mikey.zhaopeng
+ * @Last Modified time: 2021-05-11 11:00:40
+ */
 
 'use strict';
 
@@ -29,7 +35,7 @@ class ManagerController extends Controller {
     if (adminResult.length > 0) {
       await this.error('/admin/manager/add', '此管理员已经存在');
     } else {
-      const data = await ctx.model.Admin.create(formData);
+      await ctx.model.Admin.create(formData);
       await this.success('/admin/manager', '增加用户成功');
     }
   }
@@ -46,7 +52,7 @@ class ManagerController extends Controller {
   async updateUser() {
     const { ctx } = this;
     const formData = ctx.request.body;
-    // formData.password = ctx.helper.md5(formData.password);
+    if (formData.password) formData.password = ctx.helper.md5(formData.password);
     const adminResult = await ctx.model.Admin.updateOne({ _id: formData.id }, formData);
     if (adminResult.ok) {
       await this.success('/admin/manager', '修改用户信息成功');
