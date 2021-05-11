@@ -19,11 +19,13 @@ class RoleController extends Controller {
     ]);
     await ctx.render('admin/access/index', { list: rows });
   }
+
   async add() {
     const { ctx } = this;
     const rows = await ctx.model.Access.find({ module_id: '0' });
     await ctx.render('admin/access/add', { moduleList: rows });
   }
+
   async addAccess() {
     const { ctx, app } = this;
     const fromData = ctx.request.body;
@@ -35,6 +37,7 @@ class RoleController extends Controller {
       await this.success('/admin/access', '新增权限成功');
     }
   }
+
   async edit() {
     const { ctx } = this;
     const id = ctx.query.id;
@@ -42,6 +45,7 @@ class RoleController extends Controller {
     const accessResult = await ctx.model.Access.find({ _id: id });
     await ctx.render('admin/access/edit', { moduleList: rows, list: accessResult[0] });
   }
+
   async updateAccess() {
     const { ctx, app } = this;
     const fromData = ctx.request.body;
@@ -51,6 +55,7 @@ class RoleController extends Controller {
     await ctx.model.Access.findOneAndUpdate({ _id: fromData.id }, fromData);
     await this.success('/admin/access', '修改权限成功');
   }
+
   async delete() {
     const { ctx } = this;
     ctx.body = '权限删除';

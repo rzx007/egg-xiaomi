@@ -45,8 +45,10 @@ ul{
 
 
 .navbar-header{
-    width: 180px;
+    /* width: 180px; */
     text-align: center;
+    line-height: 63px;
+    color: #EEEEEE;
 }
 .navbar-inverse .navbar-nav>li>a{
     color:#f9f9f9;

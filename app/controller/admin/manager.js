@@ -20,6 +20,7 @@ class ManagerController extends Controller {
         as: 'role',
       },
     }]);
+    console.log(data);
     await ctx.render('admin/manager/index', { list: data });
   }
   async add() {
