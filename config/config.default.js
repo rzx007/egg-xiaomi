@@ -16,6 +16,12 @@ module.exports = appInfo => {
 
   // use for cookie sign key, should change to your own and keep security
   config.keys = appInfo.name + '_19921014';
+  config.session = {
+    key: 'EGG_SESS',
+    maxAge: 2 * 3600 * 1000, // 1 天
+    httpOnly: true,
+    encrypt: true,
+  };
   config.static = {
     prefix: '/',
     dir: path.join(appInfo.baseDir, 'app/public'),

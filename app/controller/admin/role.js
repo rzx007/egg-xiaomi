@@ -66,7 +66,6 @@ class RoleController extends Controller {
         }
       }
     });
-    console.log(rows);
     await ctx.render('admin/role/auth', { list: rows, role_id: id });
   }
   async addAuth() {

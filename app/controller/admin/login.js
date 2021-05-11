@@ -24,6 +24,7 @@ class LoginController extends Controller {
     const isCaptchaVail = ctx.service.tools.checkCaptcha(code);
     if (isCaptchaVail) {
       const userData = await ctx.service.admin.login.doLogin(username, ctx.helper.md5(password));
+      console.log(username, ctx.helper.md5(password));
       if (userData.length > 0) {
         ctx.session.userinfo = userData[0]; // 设置 Session
         ctx.rotateCsrfSecret(); // 调用 rotateCsrfSecret 刷新用户的 CSRF token
