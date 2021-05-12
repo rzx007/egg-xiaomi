@@ -1,3 +1,11 @@
+/*
+ * @Author: rzx007
+ * @Date: 2021-05-09 21:28:05
+ * @LastEditors: rzx007
+ * @LastEditTime: 2021-05-12 16:49:59
+ * @FilePath: \init\app\service\tools.js
+ * @Description:生成验证码和检查验证码
+ */
 'use strict';
 
 const { Service } = require('egg');
@@ -17,6 +25,7 @@ class ToolService extends Service {
   }
   // 检验客户端传过来得验证码
   checkCaptcha(code) {
+    
     const { ctx } = this;
     code = code.toLowerCase();
     // get code from session

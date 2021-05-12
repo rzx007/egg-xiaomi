@@ -1,3 +1,11 @@
+/*
+ * @Author: rzx007
+ * @Date: 2021-05-07 23:36:17
+ * @LastEditors: rzx007
+ * @LastEditTime: 2021-05-12 18:22:39
+ * @FilePath: \init\app\controller\admin\login.js
+ * @Description: 登录登出逻辑
+ */
 'use strict';
 
 const Controller = require('./baseController.js');
