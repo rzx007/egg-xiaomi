@@ -1,3 +1,11 @@
+<!--
+ * @Author: rzx007
+ * @Date: 2021-05-10 22:13:51
+ * @LastEditors: rzx007
+ * @LastEditTime: 2021-05-13 14:23:57
+ * @FilePath: \init\app\view\admin\manager\index.html
+ * @Description: Do not edit
+-->
 <%- include ../common/page_header.html %>
 
 <div class="container-fluid">
@@ -35,7 +43,8 @@
                         <th>管理员名称</th>
                         <th>管理员电话</th>
                         <th>管理员邮箱</th>
-                        <th>管理员角色</th>                  
+                        <th>管理员角色</th>    
+                        <th class="text-center">状态</th>              
                         <th class="text-center">操作</th>
                     </tr>
                     </thead>
@@ -46,6 +55,13 @@
                         <td><%=list[i].mobile%></td>
                         <td><%=list[i].email%></td>
                         <td><%=list[i].role[0].title%></td>
+                        <td  class="text-center">
+                            <%if(list[i].status==1){%>
+                                <img src="/admin/images/yes.gif" onclick="$.changeStatus(this,'Admin','status','<%=list[i]._id%>', 0)" />
+                           <%}else{%>
+                                <img src="/admin/images/no.gif"  onclick="$.changeStatus(this,'Admin','status','<%=list[i]._id%>', 1)" />
+                            <%}%>
+                    </td>  
                         <td class="text-center">
                             <a href="/admin/manager/edit?id=<%=list[i]._id%>">修改</a>
                             <a href="/admin/delete?id=<%=list[i]._id%>&model=Admin">删除</a>
@@ -59,6 +75,9 @@
         </div>
     </div>
 </div>
-
+<script>
+    $(function() {
+    })
+</script>
 </body>
 </html>

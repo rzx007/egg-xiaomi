@@ -12,14 +12,17 @@ const Controller = require('./baseController.js');
 class ManagerController extends Controller {
   async index() {
     const { ctx } = this;
-    const data = await ctx.model.Admin.aggregate([{ // 关联表查询，通过用户表的role_id与角色表的_id对应起来，用role输出
-      $lookup: {
-        from: 'role',
-        localField: 'role_id',
-        foreignField: '_id',
-        as: 'role',
+    const data = await ctx.model.Admin.aggregate([
+      {
+        // 关联表查询，通过用户表的role_id与角色表的_id对应起来，用role输出
+        $lookup: {
+          from: 'role',
+          localField: 'role_id',
+          foreignField: '_id',
+          as: 'role',
+        },
       },
-    }]);
+    ]);
     await ctx.render('admin/manager/index', { list: data });
   }
   async add() {
@@ -31,7 +34,9 @@ class ManagerController extends Controller {
     const { ctx } = this;
     const formData = ctx.request.body;
     formData.password = ctx.helper.md5(formData.password);
-    const adminResult = await ctx.model.Admin.find({ username: formData.username });
+    const adminResult = await ctx.model.Admin.find({
+      username: formData.username,
+    });
     if (adminResult.length > 0) {
       await this.error('/admin/manager/add', '此管理员已经存在');
     } else {
@@ -52,7 +57,9 @@ class ManagerController extends Controller {
   async updateUser() {
     const { ctx } = this;
     const formData = ctx.request.body;
-    if (formData.password) formData.password = ctx.helper.md5(formData.password);
+    if (formData.password) {
+      formData.password = ctx.helper.md5(formData.password);
+    }
     const adminResult = await ctx.model.Admin.updateOne({ _id: formData.id }, formData);
     if (adminResult.ok) {
       await this.success('/admin/manager', '修改用户信息成功');
