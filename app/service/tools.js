@@ -25,7 +25,7 @@ class ToolService extends Service {
   }
   // 检验客户端传过来得验证码
   checkCaptcha(code) {
-    
+
     const { ctx } = this;
     code = code.toLowerCase();
     // get code from session

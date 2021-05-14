@@ -2,7 +2,7 @@
  * @Author: rzx007
  * @Date: 2021-05-10 10:47:28
  * @LastEditors: rzx007
- * @LastEditTime: 2021-05-12 17:17:51
+ * @LastEditTime: 2021-05-13 14:53:50
  * @FilePath: \init\config\config.default.js
  * @Description: 默认配置
  */
@@ -17,7 +17,7 @@ module.exports = appInfo => {
    * built-in config
    * @type {Egg.EggAppConfig}
    **/
-  const config = exports = {};
+  const config = (exports = {});
 
   // use for cookie sign key, should change to your own and keep security
   config.keys = appInfo.name + '_19921014';
@@ -35,6 +35,11 @@ module.exports = appInfo => {
     preload: false,
     maxAge: 0,
     buffer: false,
+  };
+  // 文件上传
+  config.multipart = {
+    mode: 'file',
+    tmpdir: path.join(appInfo.baseDir, 'app/public/temp'),
   };
   config.view = {
     mapping: {

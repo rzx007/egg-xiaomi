@@ -2,7 +2,7 @@
  * @Author: rzx007
  * @Date: 2021-05-10 21:14:28
  * @LastEditors: rzx007
- * @LastEditTime: 2021-05-13 14:39:08
+ * @LastEditTime: 2021-05-14 10:50:06
  * @FilePath: \init\app\controller\admin\baseController.js
  * @Description: Controller基类，封装了一些公用controller
  */
@@ -13,6 +13,10 @@
 const Controller = require('egg').Controller;
 
 class BaseController extends Controller {
+  notFound(msg) {
+    msg = msg || 'not found';
+    this.ctx.throw(404, msg);
+  }
   async success(redirectUrl, message) {
     // this.ctx.body='成功';
 

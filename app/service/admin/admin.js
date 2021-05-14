@@ -2,7 +2,7 @@
  * @Author: rzx007
  * @Date: 2021-05-12 00:28:46
  * @LastEditors: rzx007
- * @LastEditTime: 2021-05-13 13:36:23
+ * @LastEditTime: 2021-05-14 16:44:03
  * @FilePath: \init\app\service\admin\admin.js
  * @Description: 检查登录用户所能访问的菜单权限
  */
@@ -20,33 +20,23 @@ class AdminService extends Service {
 
     // 1、获取当前用户的角色
     const userinfo = this.ctx.session.userinfo;
-
     const role_id = userinfo.role_id;
-
     const pathname = url.parse(this.ctx.request.url).pathname; // 获取当前用户访问的地址
-    //  console.log(pathname);
-
     // 忽略权限判断的地址    is_super表示是管理员
     const ignoreUrl = [ '/login', '/admin/getCaptcha', '/doLogin', '/loginOut' ];
-
     if (ignoreUrl.includes(pathname) || userinfo.is_super === 1) {
       return true; // 超级管理员允许访问
     }
     // 2、根据角色获取当前角色的权限列表
-
     const accessResult = await this.ctx.model.RoleAccess.find({ role_id });
-
     const accessArray = []; // 当前角色可以访问的权限列表
     accessResult.forEach(value => {
       accessArray.push(value.access_id.toString());
     });
-
     // 3、获取当前访问的url 对应的权限id
     const accessUrlResult = await this.ctx.model.Access.find({ url: pathname });
     // 4、判断当前访问的url对应的权限id 是否在权限列表中的id中
-
     if (accessUrlResult.length > 0) {
-      
       if (accessArray.includes(accessUrlResult[0]._id.toString())) {
         return true;
       }
@@ -68,7 +58,7 @@ class AdminService extends Service {
         },
       },
     ]);
-      // 查询当前角色拥有的权限（查询当前角色的权限id） 把查找到的数据放在数组中
+    // 查询当前角色拥有的权限（查询当前角色的权限id） 把查找到的数据放在数组中
     const accessReulst = await ctx.model.RoleAccess.find({ role_id }, { access_id: true });
     const roleAccessArray = [];
     accessReulst.forEach(value => {

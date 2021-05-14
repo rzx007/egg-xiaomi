@@ -24,6 +24,10 @@ class ManagerController extends Controller {
       },
     ]);
     await ctx.render('admin/manager/index', { list: data });
+    // const res = await ctx.service.admin.admin.getMenu();
+    // ctx.body = {
+    //   data: res,
+    // };
   }
   async add() {
     const { ctx } = this;
@@ -66,6 +70,23 @@ class ManagerController extends Controller {
     } else {
       await this.error('/admin/manager', '修改用户信息成失败');
     }
+  }
+  async upload() {
+    const { ctx, app } = this;
+    const files = ctx.request.files;
+    let pathArr = [];
+    try {
+      // 处理文件，比如上传到云端
+      pathArr = await ctx.helper.upload(app, files);
+    } finally {
+      // 需要删除临时文件
+    }
+
+    ctx.body = {
+      url: pathArr,
+      // 获取所有的字段值
+      requestBody: ctx.request.body,
+    };
   }
 }
 

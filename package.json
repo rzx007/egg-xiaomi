@@ -1,7 +1,7 @@
 {
   "name": "egg-xiaomi",
   "version": "1.0.0",
-  "description": "inspiration from  xiaomi offical shooping website by eggjs ",
+  "description": "inspiration from xiaomi offical shooping website by eggjs ",
   "private": true,
   "egg": {
     "declarations": true
@@ -14,6 +14,7 @@
     "jsonwebtoken": "^8.5.1",
     "md5": "^2.3.0",
     "moment": "^2.29.1",
+    "mz-modules": "^2.1.0",
     "svg-captcha": "^1.4.0"
   },
   "devDependencies": {

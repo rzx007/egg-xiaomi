@@ -2,7 +2,7 @@
  * @Author: rzx007
  * @Date: 2021-05-08 12:39:10
  * @LastEditors: rzx007
- * @LastEditTime: 2021-05-13 14:40:48
+ * @LastEditTime: 2021-05-14 17:04:50
  * @FilePath: \init\app\router\admin.js
  * @Description: 后台路由接口
  */
@@ -24,6 +24,7 @@ module.exports = app => {
   router.post('/admin/manager/addUser', controller.admin.manager.addUser); // 新增用户保存接口
   router.get('/admin/manager/edit', controller.admin.manager.edit); // 编辑用户页面
   router.post('/admin/manager/updateUser', controller.admin.manager.updateUser); // 编辑提交保存接口
+  router.post('/admin/manager/upload', controller.admin.manager.upload); // 编辑提交保存接口
 
   // 角色增删改
   router.get('/admin/role', controller.admin.role.index);
@@ -40,4 +41,11 @@ module.exports = app => {
   router.get('/admin/access/edit', controller.admin.access.edit);
   router.post('/admin/access/addAccess', controller.admin.access.addAccess); // 新增权限保存接口
   router.post('/admin/access/updateAccess', controller.admin.access.updateAccess); // 新增权限保存接口
+
+  // 轮播图文件上传
+  router.get('/admin/carousel', controller.admin.carousel.index);
+  router.get('/admin/carousel/add', controller.admin.carousel.add);
+  router.get('/admin/carousel/edit', controller.admin.carousel.edit);
+  router.post('/admin/carousel/addCarousel', controller.admin.carousel.addCarousel); // 新增权限保存接口
+
 };
