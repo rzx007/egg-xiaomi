@@ -2,7 +2,7 @@
  * @Author: rzx007
  * @Date: 2021-05-14 16:27:09
  * @LastEditors: rzx007
- * @LastEditTime: 2021-05-14 17:01:21
+ * @LastEditTime: 2021-05-16 00:51:55
  * @FilePath: \init\app\view\admin\carousel\index.html
  * @Description: Do not edit
 -->
@@ -28,54 +28,40 @@
                                     <th>名称</th>
                                     <th>分类</th>
                                     <th>图片</th>
-                                    <th>跳转地址</th>                                             
+                                    <th>跳转地址</th>          
+                                    <th class="text-center">排序</th>                                    
                                     <th class="text-center">状态</th>                                             
-                                
                                     <th class="text-center">操作</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                     <%for(var i=0;i<list.length;i++){%>
                                             <tr>
-                                                    <td><%=list[i].title%></td>   
-                                                    
-                                                    <td>
-    
+                                                    <td><%=list[i].title%></td>                                                     
+                                                    <td>    
                                                        <%if(list[i].type==1){%>
-    
-                                                                网站
-    
+                                                            网站
                                                         <%}else if(list[i].type==2){%>
                                                             App
-    
                                                         <%}else if(list[i].type==3){%>
                                                             小程序
-                                                        <%}else {%>
-                                                       
-                                                                未知类型
-                                                               
+                                                        <%}else {%>                                                   
+                                                            未知类型                                                              
                                                         <%}%>
-    
                                                     </td>   
-                                                    <td><img class="pic" src="<%=list[i].focus_img%>" /></td>
+                                                    <td><img class="pic" width="120px" src="<%=list[i].carousel_img%>" /></td>
                                                     <td><%=list[i].link%></td>
+                                                    <td class="text-center"><span onclick="$.editNum(this,'Carousel','sort','<%=list[i]._id%>')"><%=list[i].sort%></span></td>
                                                     <td class="text-center">
-    
                                                        <%if(list[i].status==1){%>
-    
-                                                                <img src="/public/admin/images/yes.gif" onclick="app.changeStatus(this,'Focus','status','<%=list[i]._id%>')" />
-    
+                                                            <img src="/admin/images/yes.gif" onclick="$.changeStatus(this,'Carousel','status','<%=list[i]._id%>')" />
                                                         <%}else{%>
-                                                                <img src="/public/admin/images/no.gif" onclick="app.changeStatus(this,'Focus','status','<%=list[i]._id%>')" />
+                                                            <img src="/admin/images/no.gif" onclick="$.changeStatus(this,'Carousel','status','<%=list[i]._id%>')" />
                                                         <%}%>
-    
                                                     </td>                                                                    
-                                                    <td class="text-center">　<a href="/admin/focus/edit?id=<%=list[i]._id%>">修改</a>　<a class="delete" href="/admin/delete?model=Focus&id=<%=list[i]._id%>">删除</a></td>
+                                                    <td class="text-center">　<a href="/admin/carousel/edit?id=<%=list[i]._id%>">修改</a>　<a class="delete" href="/admin/delete?model=Carousel&id=<%=list[i]._id%>">删除</a></td>
                                                 </tr>
-                                    
-        
                                     <%}%>
-    
                                 </tbody>
                             </table>
                         </div>
@@ -85,6 +71,9 @@
         </div>
     </div>
 
+<script>
+    $(function() {})
+</script>
     </body>
 
     </html>

@@ -2,7 +2,7 @@
  * @Author: rzx007
  * @Date: 2021-05-12 00:28:46
  * @LastEditors: rzx007
- * @LastEditTime: 2021-05-14 16:44:03
+ * @LastEditTime: 2021-05-14 21:40:50
  * @FilePath: \init\app\service\admin\admin.js
  * @Description: 检查登录用户所能访问的菜单权限
  */
@@ -17,7 +17,6 @@ class AdminService extends Service {
         3、获取当前访问的url 对应的权限id
         4、判断当前访问的url对应的权限id 是否在权限列表中的id中
     */
-
     // 1、获取当前用户的角色
     const userinfo = this.ctx.session.userinfo;
     const role_id = userinfo.role_id;

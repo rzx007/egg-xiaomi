@@ -2,7 +2,7 @@
  * @Author: rzx007
  * @Date: 2021-05-08 12:39:10
  * @LastEditors: rzx007
- * @LastEditTime: 2021-05-14 17:04:50
+ * @LastEditTime: 2021-05-16 00:28:30
  * @FilePath: \init\app\router\admin.js
  * @Description: 后台路由接口
  */
@@ -16,7 +16,8 @@ module.exports = app => {
   router.post('/doLogin', controller.admin.login.doLogin);
   router.get('/loginOut', controller.admin.login.loginOut);
   router.get('/admin/delete', controller.admin.baseController.delete); // 公共删除接口,传入model名称和_id
-  router.get('/admin/common/changeStatus', controller.admin.baseController.changeStatus);
+  router.get('/admin/common/changeStatus', controller.admin.baseController.changeStatus); // 公共删改变数据状态,传入model名称和_id
+  router.get('/admin/common/editNum', controller.admin.baseController.editNum); // 公共删改变数据得值（number）,传入model名称和_id
 
   // 用户增删改
   router.get('/admin/manager', controller.admin.manager.index);
@@ -46,6 +47,7 @@ module.exports = app => {
   router.get('/admin/carousel', controller.admin.carousel.index);
   router.get('/admin/carousel/add', controller.admin.carousel.add);
   router.get('/admin/carousel/edit', controller.admin.carousel.edit);
-  router.post('/admin/carousel/addCarousel', controller.admin.carousel.addCarousel); // 新增权限保存接口
+  router.post('/admin/carousel/addCarousel', controller.admin.carousel.addCarousel);
+  router.post('/admin/carousel/updateCarousel', controller.admin.carousel.updateCarousel);
 
 };

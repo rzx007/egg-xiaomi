@@ -1,13 +1,4 @@
-/*
- * @Author: rzx007
- * @Date: 2021-05-07 22:53:10
- * @LastEditors: rzx007
- * @LastEditTime: 2021-05-13 14:23:50
- * @FilePath: \init\app\public\admin\js\base.js
- * @Description: Do not edit
- */
-
-
+/* eslint-disable no-undef */
 // eslint-disable-next-line strict
 $(function() {
   $('.aside h4').click(function() {
@@ -25,6 +16,31 @@ $(function() {
           }
         }
       });
+    },
+    editNum(el, model, attr, id) {
+      const val = $(el).html();
+      const input = $("<input value='' />");
+      // 把input放在sapn里面
+      $(el).html(input);
+      // 让input获取焦点  给input赋值
+      $(input).trigger('focus').val(val);
+
+
+      // 点击input的时候阻止冒泡
+      $(input).click(function() {
+        return false;
+      });
+      // 鼠标离开的时候给sapn赋值
+      $(input).blur(function() {
+        const num = $(this).val();
+        $(el).html(num);
+        $.get('/admin/common/editNum', { model, attr, id, num }, function(data) {
+          console.log(data);
+        });
+
+      });
+
+
     },
   });
 });

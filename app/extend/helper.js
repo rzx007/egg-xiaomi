@@ -2,7 +2,7 @@
  * @Author: rzx007
  * @Date: 2021-05-09 20:37:43
  * @LastEditors: rzx007
- * @LastEditTime: 2021-05-14 15:43:21
+ * @LastEditTime: 2021-05-14 22:51:27
  * @FilePath: \init\app\extend\helper.js
  * @Description: 一些实用的 utility 函数
  */
@@ -32,8 +32,8 @@ module.exports = {
   md5: str => md5(str), // MD5加密
   upload: async (app, files, temp) => { // 文件上传
     const day = moment().format('YYYYMMDD') + '\\';
-    const basePath = app.config.baseDir + '\\app\\public\\';
-    const tempPath = (temp || 'file\\') + day;
+    const basePath = app.config.baseDir + '\\app\\public';
+    const tempPath = '\\' + (temp || 'file\\') + day;
     const filepathArr = [];
     await mkdirp(basePath + tempPath);
     for (const key in files) {

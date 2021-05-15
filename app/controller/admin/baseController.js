@@ -2,7 +2,7 @@
  * @Author: rzx007
  * @Date: 2021-05-10 21:14:28
  * @LastEditors: rzx007
- * @LastEditTime: 2021-05-14 10:50:06
+ * @LastEditTime: 2021-05-16 00:36:58
  * @FilePath: \init\app\controller\admin\baseController.js
  * @Description: Controller基类，封装了一些公用controller
  */
@@ -19,7 +19,6 @@ class BaseController extends Controller {
   }
   async success(redirectUrl, message) {
     // this.ctx.body='成功';
-
     await this.ctx.render('admin/common/success', {
       redirectUrl,
       message: message || '操作成功!',
@@ -28,13 +27,11 @@ class BaseController extends Controller {
 
   async error(redirectUrl, message) {
     // this.ctx.body='成功';
-
     await this.ctx.render('admin/common/error', {
       redirectUrl,
       message: message || '操作成功!',
     });
   }
-
   // 封装一个删除方法
   async delete() {
     /*
@@ -45,14 +42,11 @@ class BaseController extends Controller {
       */
     const prevPage = this.ctx.request.headers.referer;
     const model = this.ctx.request.query.model; // Role
-
     const id = this.ctx.request.query.id;
-
     await this.ctx.model[model].deleteOne({ _id: id }); // 注意写法
-
     this.ctx.redirect(prevPage);
   }
-  // 公共更改数据状态
+  // 公共更改数据状态(status)
   async changeStatus() {
     const { ctx } = this;
     const { model, attr, id, value } = ctx.query;
@@ -73,6 +67,22 @@ class BaseController extends Controller {
       }
     } else {
       ctx.helper.error({ ctx, msg: '更新失败,参数错误' });
+    }
+  }
+  // 公共改变数据值(number),如数据得价格，排序权重等
+  async editNum() {
+    const { ctx } = this;
+    const { model, attr, id, num } = ctx.query;
+    const result = await this.ctx.model[model].find({ _id: id });
+    if (result.length > 0) {
+      const row = await this.ctx.model[model].updateOne({ _id: id }, { [attr]: num });
+      if (row) {
+        ctx.helper.success({ ctx, msg: '更新成功' });
+      } else {
+        ctx.helper.error({ ctx, msg: '更新失败' });
+      }
+    } else {
+      ctx.helper.error({ ctx, msg: '更新失败' });
     }
   }
 }
