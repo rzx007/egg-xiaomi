@@ -50,7 +50,9 @@ table .th {
 input[type='file'] {
   display: inline !important;
 }
-
+.panel-body{
+  margin-bottom: 1rem;
+}
 .col-sm-2,
 .col-sm-10 {
   padding-left: 0px;
