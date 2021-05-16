@@ -1,9 +1,19 @@
 /* eslint-disable no-undef */
 // eslint-disable-next-line strict
 $(function() {
-  $('.aside h4').click(function() {
+  $('.aside .menu-link').click(function() {
     //		$(this).toggleClass('active');
     $(this).siblings('ul').slideToggle();
+    $(this).children('.menu-arrow').toggleClass('menu-arrow-down');
+  });
+  $('.aside .menu-link-sub').click(function() {
+    //		$(this).toggleClass('active');
+    $('.aside .menu-link-sub').each(function() {
+      $(this).removeClass('active-item');
+    });
+    const url = $(this).data('src');
+    $(this).addClass('active-item');
+    $('#frame').attr('src', url);
   });
   $.extend({
     changeStatus(el, model, attr, id, value) {

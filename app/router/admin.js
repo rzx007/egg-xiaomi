@@ -2,7 +2,7 @@
  * @Author: rzx007
  * @Date: 2021-05-08 12:39:10
  * @LastEditors: rzx007
- * @LastEditTime: 2021-05-16 00:28:30
+ * @LastEditTime: 2021-05-16 13:09:51
  * @FilePath: \init\app\router\admin.js
  * @Description: 后台路由接口
  */
@@ -19,6 +19,7 @@ module.exports = app => {
   router.get('/admin/common/changeStatus', controller.admin.baseController.changeStatus); // 公共删改变数据状态,传入model名称和_id
   router.get('/admin/common/editNum', controller.admin.baseController.editNum); // 公共删改变数据得值（number）,传入model名称和_id
 
+  router.get('/admin/home', controller.admin.home.index);
   // 用户增删改
   router.get('/admin/manager', controller.admin.manager.index);
   router.get('/admin/manager/add', controller.admin.manager.add); // 用户新增页面

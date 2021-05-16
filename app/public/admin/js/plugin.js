@@ -1,8 +1,10 @@
+/* eslint-disable no-shadow-restricted-names */
+/* eslint-disable no-unused-vars */
 /*
  * @Author: rzx007
  * @Date: 2021-05-13 14:05:29
  * @LastEditors: rzx007
- * @LastEditTime: 2021-05-13 14:08:49
+ * @LastEditTime: 2021-05-16 17:58:09
  * @FilePath: \init\app\public\admin\js\plugin.js
  * @Description: jQuery插件简单开发
  */

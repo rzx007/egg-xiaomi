@@ -1,0 +1,36 @@
+<!--
+ * @Author: rzx007
+ * @Date: 2021-05-16 15:25:55
+ * @LastEditors: rzx007
+ * @LastEditTime: 2021-05-16 18:47:40
+ * @FilePath: \init\app\view\admin\layout\aside.html
+ * @Description: Do not edit
+-->
+<div class="aside fw-bold fs-5">
+    <h2 class="p-5">商城后台</h2>
+    <ul>
+        <%for(var i=0;i<asideList.length;i++){%>   		
+          <li class="menu-item">
+              <%if((asideList[i].checked && asideList[i].type==1) || (userinfo.is_super==1&& asideList[i].type==1)){%>
+                  <p class="menu-link d-flex justify-content-between">
+                    <span class="menu-icon"> <i class="bi bi-people"></i></span>
+                    <span class="menu-title"> <%=asideList[i].module_name %></span>
+                    <span class="menu-arrow"><i class="bi bi-chevron-right"></i></span>
+                  </p>                     
+                  <ul class="menu-sub">
+                    <%for(var j=0;j<asideList[i].items.length;j++){%> 
+                        <%if((asideList[i].items[j].checked && asideList[i].items[j].type!=3) || (userinfo.is_super==1 && asideList[i].items[j].type!=3)){%>
+                            <li class="menu-item" > 
+                                <p class="menu-link-sub" data-src='<%=asideList[i].items[j].url%>'> 
+                                   <span class="bullet-dot"></span>
+                                   <span class="menu-title"><%=asideList[i].items[j].action_name %></span> 
+                                </p>
+                            </li>
+                        <%}%>
+                    <%}%>
+                  </ul>
+            <%}%>
+          </li>
+        <%}%>
+    </ul>
+</div>

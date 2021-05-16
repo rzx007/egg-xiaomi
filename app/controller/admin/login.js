@@ -2,7 +2,7 @@
  * @Author: rzx007
  * @Date: 2021-05-07 23:36:17
  * @LastEditors: rzx007
- * @LastEditTime: 2021-05-12 18:22:39
+ * @LastEditTime: 2021-05-16 16:12:23
  * @FilePath: \init\app\controller\admin\login.js
  * @Description: 登录登出逻辑
  */
@@ -36,7 +36,7 @@ class LoginController extends Controller {
       if (userData.length > 0) {
         ctx.session.userinfo = userData[0]; // 设置 Session
         ctx.rotateCsrfSecret(); // 调用 rotateCsrfSecret 刷新用户的 CSRF token
-        ctx.redirect('/admin/manager');
+        ctx.redirect('/admin/home');
         /*
         const data = {
           username: userData.username,
