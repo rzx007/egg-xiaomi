@@ -1,0 +1,82 @@
+<%- include ../common/page_header.html %>
+
+    <div class=" content">
+        <div class="panel panel-default">
+            <div class="alert alert-secondary">
+                <a href="/admin/goodsTypeAttr/add?id=<%=cate_id%>" class="btn btn-primary">增加商品属性</a>
+            </div>
+            <div class="panel-body">
+                <form role="form" class="row g-2">
+                    <div class="col-auto">
+                        <label for="name" class="visually-hidden">名称</label>
+                        <input type="text" class="form-control" id="name" placeholder="请输入名称">
+                    </div>
+                    <div class="col-auto">
+                        <button type="submit" class="btn btn-primary">开始搜索</button>
+                    </div>
+                </form>
+            </div>
+        </div
+             <!--列表展示 -->
+             <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                    <tr class="th">
+                        <th>属性名称</th>
+                        <th>商品类型</th>
+                        <th>属性值的录入方式</th>                                
+                        <th>可选值列表</th>          
+                        <th>增加时间</th>  
+                        <th class="text-center">状态</th>                                                
+                    
+                        <th class="text-center">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    <%for(var i=0;i<list.length;i++){%>
+
+
+                            <tr>
+                                    <td><%=list[i].title%></td>
+                                    
+                                    <td><%=list[i].goods_type[0].title%></td>
+                                    <td>                                                
+                                        <%if(list[i].attr_type==1){%>
+                                            单行文本框
+                                        <%}else if(list[i].attr_type==2){%>
+                                            多行文本框                                                 
+                                        <%}else if(list[i].attr_type==3){%>
+                                            select下拉框   
+                                        <%}%>                                                
+                                    </td>
+                                    <td><%=list[i].attr_value%></td>
+
+                                    <td><%=helper.formatTime(list[i].add_time)%></td>
+
+                                    <td  class="text-center">
+
+                                            <%if(list[i].status==1){%>
+
+                                                    <img src="/admin/images/yes.gif" onclick="app.changeStatus(this,'GoodsTypeAttr','status','<%=list[i]._id%>')" />
+
+                                            <%}else{%>
+                                                    <img src="/admin/images/no.gif" onclick="app.changeStatus(this,'GoodsTypeAttr','status','<%=list[i]._id%>')" />
+                                            <%}%>
+
+                                    </td>    
+                                                        
+                                    <td class="text-center"><a href="/admin/goodsTypeAttr/edit?id=<%=list[i]._id%>">修改</a>　<a  class="delete" href="/admin/delete?model=GoodsTypeAttr&id=<%=list[i]._id%>">删除</a></td>
+                                </tr>
+                                
+
+                    <%}%>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    </body>
+
+    </html>

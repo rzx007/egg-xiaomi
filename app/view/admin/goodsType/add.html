@@ -2,8 +2,8 @@
  * @Author: rzx007
  * @Date: 2021-05-11 15:49:56
  * @LastEditors: rzx007
- * @LastEditTime: 2021-05-16 18:31:11
- * @FilePath: \init\app\view\admin\role\add.html
+ * @LastEditTime: 2021-05-23 13:57:28
+ * @FilePath: \init\app\view\admin\goodsType\add.html
  * @Description: Do not edit
 -->
 <%- include ../common/page_header.html %>
@@ -15,17 +15,16 @@
           
             <div class="panel panel-default">              
 			    <div class="alert alert-secondary">
-                  增加角色
+                  增加商品类型
                 </div>
                 <div class="panel-body">
                     <div class="table-responsive input-form">
-                        <form action="/admin/role/addRole" method="post">
+                        <form action="/admin/goodsType/addGoods" method="post">
                             <ul>
-
                                 <input type="hidden" name="_csrf" value="<%=ctx.csrf%>">
-                                <li>  角色名称: <input type="text" name="title"/></li>
+                                <li> 商品类型: <input type="text" name="title"/></li>
                                 <li>
-                                    角色描述:
+                                    商品描述:
                                     <textarea name="description" id="" cols="60" rows="8"></textarea>
                                 </li>
                                 <li>

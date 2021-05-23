@@ -2,7 +2,7 @@
  * @Author: rzx007
  * @Date: 2021-05-08 12:39:10
  * @LastEditors: rzx007
- * @LastEditTime: 2021-05-16 13:09:51
+ * @LastEditTime: 2021-05-18 13:50:21
  * @FilePath: \init\app\router\admin.js
  * @Description: 后台路由接口
  */
@@ -50,5 +50,19 @@ module.exports = app => {
   router.get('/admin/carousel/edit', controller.admin.carousel.edit);
   router.post('/admin/carousel/addCarousel', controller.admin.carousel.addCarousel);
   router.post('/admin/carousel/updateCarousel', controller.admin.carousel.updateCarousel);
+
+  // 商品类型
+  router.get('/admin/goodsType', controller.admin.goodsType.index);
+  router.get('/admin/goodsType/add', controller.admin.goodsType.add);
+  router.get('/admin/goodsType/edit', controller.admin.goodsType.edit);
+  router.post('/admin/goodsType/addGoods', controller.admin.goodsType.addGoods);
+  router.post('/admin/goodsType/updateGoods', controller.admin.goodsType.updateGoods);
+
+  // 商品类型属性
+  router.get('/admin/goodsTypeAttr', controller.admin.goodsTypeAttr.index);
+  router.get('/admin/goodsTypeAttr/add', controller.admin.goodsTypeAttr.add);
+  router.get('/admin/goodsTypeAttr/edit', controller.admin.goodsTypeAttr.edit);
+  router.post('/admin/goodsTypeAttr/addGoods', controller.admin.goodsTypeAttr.addGoods);
+  router.post('/admin/goodsTypeAttr/updateGoods', controller.admin.goodsTypeAttr.updateGoods);
 
 };

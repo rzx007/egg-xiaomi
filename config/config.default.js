@@ -2,7 +2,7 @@
  * @Author: rzx007
  * @Date: 2021-05-10 10:47:28
  * @LastEditors: rzx007
- * @LastEditTime: 2021-05-13 14:53:50
+ * @LastEditTime: 2021-05-18 11:17:42
  * @FilePath: \init\config\config.default.js
  * @Description: 默认配置
  */
@@ -51,7 +51,11 @@ module.exports = appInfo => {
     cert: 'huanggegehaoshuai', // jwt秘钥
   };
   // add your middleware config here
-  config.middleware = [ 'auth' ];
+  config.middleware = [ 'auth', 'errorHandler' ];
+  // 只对 /api 前缀的 url 路径生效
+  config.errorHandler = {
+    // match: '/api',
+  };
   config.auth = {
     match: '/admin',
   };

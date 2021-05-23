@@ -75,9 +75,13 @@ input[type='file'] {
 }
 .main_wrap .header {
   height: 60px;
+  box-shadow: 0 7px 5px -5px #333;
+  /* box-shadow: 0 7px 14px 0 rgb(65 69 88 / 10%), 0 3px 6px 0 rgb(0 0 0 / 7%); */
 }
 .content {
   height: 100%;
+  box-sizing: border-box;
+  padding: 1.2rem;
   background-color: #f5f8fa;
 }
 .content-main {
@@ -150,9 +154,9 @@ input[type='file'] {
   color: #7e8299;
 }
 .menu-arrow{
-  transform:rotate(0deg);
+  transform:rotate(90deg);
   transition: all .3s ease-in-out;
 }
 .menu-arrow-down{
-  transform:rotate(90deg);
+  transform:rotate(0deg);
 }

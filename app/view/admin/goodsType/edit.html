@@ -2,8 +2,8 @@
  * @Author: rzx007
  * @Date: 2021-05-11 15:49:56
  * @LastEditors: rzx007
- * @LastEditTime: 2021-05-17 20:58:23
- * @FilePath: \init\app\view\admin\role\edit.html
+ * @LastEditTime: 2021-05-18 13:44:30
+ * @FilePath: \init\app\view\admin\goodsType\edit.html
  * @Description: Do not edit
 -->
 <%- include ../common/page_header.html %>
@@ -12,23 +12,22 @@
 <div class="content">
     <div class="panel panel-default">              
         <div class="alert alert-secondary">
-          编辑角色
+          编辑商品类型
         </div>
         <div class="panel-body">
             <div class="table-responsive input-form">
-                <form action="/admin/role/updateRole" method="post">
+                <form action="/admin/goodsType/updateGoods" method="post">
                     <ul>
                         <input type="hidden" name="_csrf" value="<%=ctx.csrf%>">
 
                         <input type="hidden" name="_id" value="<%=list._id%>" />
 
-
-                        <li>  角色名称: <input type="text" name="title" value="<%=list.title%>"/></li>
+                        <li>  商品类型名称: <input type="text" name="title" value="<%=list.title%>"/></li>
 
                        
 
                         <li>
-                            角色描述:
+                            商品类型描述:
                             <textarea name="description" id="" cols="60" rows="8"><%=list.description%></textarea>
                         </li>
 
