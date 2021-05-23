@@ -2,7 +2,7 @@
  * @Author: rzx007
  * @Date: 2021-05-08 12:39:10
  * @LastEditors: rzx007
- * @LastEditTime: 2021-05-18 13:50:21
+ * @LastEditTime: 2021-05-23 23:45:36
  * @FilePath: \init\app\router\admin.js
  * @Description: 后台路由接口
  */
@@ -65,4 +65,10 @@ module.exports = app => {
   router.post('/admin/goodsTypeAttr/addGoods', controller.admin.goodsTypeAttr.addGoods);
   router.post('/admin/goodsTypeAttr/updateGoods', controller.admin.goodsTypeAttr.updateGoods);
 
+  // 商品分类
+  router.get('/admin/goodsCate', controller.admin.goodsCate.index);
+  router.get('/admin/goodsCate/add', controller.admin.goodsCate.add);
+  router.get('/admin/goodsCate/edit', controller.admin.goodsCate.edit);
+  router.post('/admin/goodsCate/addGoods', controller.admin.goodsCate.addGoods);
+  router.post('/admin/goodsCate/updateGoods', controller.admin.goodsCate.updateGoods);
 };

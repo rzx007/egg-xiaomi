@@ -2,7 +2,7 @@
  * @Author: rzx007
  * @Date: 2021-05-14 16:28:21
  * @LastEditors: rzx007
- * @LastEditTime: 2021-05-15 00:22:15
+ * @LastEditTime: 2021-05-23 23:24:18
  * @FilePath: \init\app\controller\admin\carousel.js
  * @Description:轮播图逻辑
  */
@@ -24,7 +24,7 @@ class CarouselController extends Controller {
     const { ctx } = this;
     const id = ctx.query.id;
     const data = await ctx.model.Carousel.find({ _id: id });
-    console.log(data);
+    // console.log(data);
     await ctx.render('admin/carousel/edit', { list: data[0] });
   }
   async addCarousel() {

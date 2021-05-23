@@ -1,0 +1,69 @@
+<%- include ../common/page_header.html %>
+
+    <div class=" content">
+        <div class="panel panel-default">
+            <div class="alert alert-secondary">
+                <a href="/admin/goodsCate/add" class="btn btn-primary">增加商品分类</a>
+            </div>
+            <div class="panel-body">
+                <form role="form" class="row g-2">
+                    <div class="col-auto">
+                        <label for="name" class="visually-hidden">名称</label>
+                        <input type="text" class="form-control" id="name" placeholder="请输入名称">
+                    </div>
+                    <div class="col-auto">
+                        <button type="submit" class="btn btn-primary">开始搜索</button>
+                    </div>
+                </form>
+            </div>
+        </div
+             <!--列表展示 -->
+             <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr class="th">
+                            <th>商品类型名称</th>
+                            <th>描述</th>
+                            <th>增加时间</th>
+                            <th class="text-center">状态</th>   
+                            <th class="text-center">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <%for(var i=0;i<list.length;i++){%>
+                            <tr>
+                                <td>
+                                    <%=list[i].title%>
+                                </td>
+                                <td>
+                                    <%=list[i].description%>
+                                </td>
+                                <td>
+                                    <%=helper.formatTime(list[i].add_time)%>
+                                </td>
+                                <td  class="text-center">
+                                    <%if(list[i].status==1){%>
+
+                                            <img src="/admin/images/yes.gif" onclick="$.changeStatus(this,'GoodsType','status','<%=list[i]._id%>')" />
+
+                                    <%}else{%>
+                                            <img src="/admin/images/no.gif" onclick="$.changeStatus(this,'GoodsType','status','<%=list[i]._id%>')" />
+                                    <%}%>
+
+                            </td>    
+                                <td class="text-center">
+                                    <a href="/admin/goodsTypeAttr?id=<%=list[i]._id%>">属性列表</a>
+                                    <a href="/admin/goodsType/edit?id=<%=list[i]._id%>">修改</a>
+                                    <a href="/admin/delete?model=GoodsType&id=<%=list[i]._id%>">删除</a>
+                                </td>
+                            </tr>
+                        <%}%>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    </body>
+
+    </html>

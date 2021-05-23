@@ -66,10 +66,11 @@
 
                                     </td>    
                                                         
-                                    <td class="text-center"><a href="/admin/goodsTypeAttr/edit?id=<%=list[i]._id%>">修改</a>　<a  class="delete" href="/admin/delete?model=GoodsTypeAttr&id=<%=list[i]._id%>">删除</a></td>
+                                    <td class="text-center">
+                                        <a href="/admin/goodsTypeAttr/edit?id=<%=list[i]._id%>&cateName=<%=list[i].goods_type[0].title%>">修改</a>　
+                                        <a class="delete" href="/admin/delete?model=GoodsTypeAttr&id=<%=list[i]._id%>">删除</a>
+                                    </td>
                                 </tr>
-                                
-
                     <%}%>
                     </tbody>
                 </table>
