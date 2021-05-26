@@ -2,8 +2,8 @@
  * @Author: rzx007
  * @Date: 2021-05-11 15:49:56
  * @LastEditors: rzx007
- * @LastEditTime: 2021-05-18 13:44:30
- * @FilePath: \init\app\view\admin\goodsType\edit.html
+ * @LastEditTime: 2021-05-26 12:57:09
+ * @FilePath: \init\app\view\admin\goodsCate\edit.html
  * @Description: Do not edit
 -->
 <%- include ../common/page_header.html %>
@@ -12,29 +12,41 @@
 <div class="content">
     <div class="panel panel-default">              
         <div class="alert alert-secondary">
-          编辑商品类型
+          编辑商品分类
         </div>
         <div class="panel-body">
             <div class="table-responsive input-form">
-                <form action="/admin/goodsType/updateGoods" method="post">
-                    <ul>
-                        <input type="hidden" name="_csrf" value="<%=ctx.csrf%>">
-
-                        <input type="hidden" name="_id" value="<%=list._id%>" />
-
-                        <li>  商品类型名称: <input type="text" name="title" value="<%=list.title%>"/></li>
-
-                       
-
-                        <li>
-                            商品类型描述:
-                            <textarea name="description" id="" cols="60" rows="8"><%=list.description%></textarea>
-                        </li>
-
-                        <li>
-                            <br/>
-                            <button type="submit" class="btn btn-primary">提交</button>
-                        </li>
+                <form action="/admin/goodsCate/updateGoods?_csrf=<%=ctx.csrf%>" method="post" enctype="multipart/form-data">
+                    <ul class="form_input">
+                            <li> <input type="text" name="id" hidden value="<%=list._id%>"/></li>  
+                            <li> <input type="text" name="pid" hidden value="<%=list.pid%>"/></li> 
+                            <li>  <span>分类名称:</span> <input type="text" name="title" class="input" value="<%=list.title%>"/></li>  
+                            <li>  <span>上级分类:</span>                         
+                                <select name="pid" id="pid" >                                    
+                                    <option value="0">顶级分类</option> 
+                                    <%for(var i=0;i<cateList.length;i++){%>                                
+                                        <option <%if(list.pid.toString()==cateList[i]._id.toString()){%>selected<%}%> value="<%=cateList[i]._id%>"><%=cateList[i].title%></option>                                           
+                                    <%}%>
+                                </select>
+                            </li>  
+                            <li> <span>分类图片:</span>  <input type="file" name="cate_img"/></li>  
+                            <img src="<%=list.cate_img%>" alt="分类图片" width="150">  
+                            <li> <span>筛选属性:</span> <input type="text" value="<%=list.filter_attr%>" name="filter_attr" class="input"/></li> 
+                            <li>  <span>跳转地址:</span>  <input type="text" value="<%=list.link%>"  name="link" class="input"/></li> 
+                            <li>  <span>分类模板:</span> <input type="text" name="template" value="<%=list.template%>" class="input"/><span>空表示默认模板</span></li>
+                            <li>  <span>Seo标题:</span> <input type="text" name="sub_title" value="<%=list.sub_title%>" class="input"/></li>
+                            <li>  <span>Seo关键词: </span><input type="text" name="keywords" value="<%=list.keywords%>" class="input"/></li>
+                            <li>  <span>Seo描述:</span> <textarea name="description" id="description" cols="84" rows="4">
+                               <%=list.description%>
+                            </textarea></li>                   
+                            <li>  <span>排　　序:</span> <input type="text" name="sort" value="<%=list.sort%>"/></li>           
+                            <li>  <span>状　　态:</span>
+                                <input type="radio" name="status" <%if(list.status==1){%>checked<%}%> value="1" id="a"/> <label for="a">显示</label>
+                                <input type="radio" name="status" <%if(list.status==0){%>checked<%}%> value="0" id="b"/><label for="b">隐藏</label> </li>
+                            <li>
+                                <br/>
+                                <button type="submit" class="btn btn-primary">提交</button>
+                            </li>
 
                     </ul>
 

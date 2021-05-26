@@ -1,3 +1,11 @@
+<!--
+ * @Author: rzx007
+ * @Date: 2021-05-23 23:34:11
+ * @LastEditors: rzx007
+ * @LastEditTime: 2021-05-26 11:47:22
+ * @FilePath: \init\app\view\admin\goodsCate\index.html
+ * @Description: Do not edit
+-->
 <%- include ../common/page_header.html %>
 
     <div class=" content">
@@ -31,7 +39,7 @@
                     </thead>
                     <tbody>
                         <%for(var i=0;i<list.length;i++){%>
-                            <tr>
+                            <tr style="background-color: rgb(159, 32, 243);color: #fff;">
                                 <td>
                                     <%=list[i].title%>
                                 </td>
@@ -44,19 +52,45 @@
                                 <td  class="text-center">
                                     <%if(list[i].status==1){%>
 
-                                            <img src="/admin/images/yes.gif" onclick="$.changeStatus(this,'GoodsType','status','<%=list[i]._id%>')" />
+                                            <img src="/admin/images/yes.gif" onclick="$.changeStatus(this,'GoodsCate','status','<%=list[i]._id%>')" />
 
                                     <%}else{%>
-                                            <img src="/admin/images/no.gif" onclick="$.changeStatus(this,'GoodsType','status','<%=list[i]._id%>')" />
+                                            <img src="/admin/images/no.gif" onclick="$.changeStatus(this,'GoodsCate','status','<%=list[i]._id%>')" />
                                     <%}%>
 
                             </td>    
                                 <td class="text-center">
-                                    <a href="/admin/goodsTypeAttr?id=<%=list[i]._id%>">属性列表</a>
-                                    <a href="/admin/goodsType/edit?id=<%=list[i]._id%>">修改</a>
-                                    <a href="/admin/delete?model=GoodsType&id=<%=list[i]._id%>">删除</a>
+                                    <a href="/admin/goodsCate/edit?id=<%=list[i]._id%>">修改</a>
+                                    <a href="/admin/delete?model=GoodsCate&id=<%=list[i]._id%>">删除</a>
                                 </td>
                             </tr>
+                            <%for(var j=0;j<list[i].items.length;j++){%>
+                                <tr style="text-align: center;">
+                                    <td>
+                                        <%=list[i].items[j].title%>
+                                    </td>
+                                    <td>
+                                        <%=list[i].items[j].description%>
+                                    </td>
+                                    <td>
+                                        <%=helper.formatTime(list[i].items[j].add_time)%>
+                                    </td>
+                                    <td  class="text-center">
+                                        <%if(list[i].items[j].status==1){%>
+    
+                                                <img src="/admin/images/yes.gif" onclick="$.changeStatus(this,'GoodsCate','status','<%=list[i]._id%>')" />
+    
+                                        <%}else{%>
+                                                <img src="/admin/images/no.gif" onclick="$.changeStatus(this,'GoodsCate','status','<%=list[i]._id%>')" />
+                                        <%}%>
+    
+                                </td>    
+                                    <td class="text-center">
+                                        <a href="/admin/goodsCate/edit?id=<%=list[i].items[j]._id%>">修改</a>
+                                        <a href="/admin/delete?model=GoodsCate&id=<%=list[i].items[j]._id%>">删除</a>
+                                    </td>
+                                </tr>
+                            <%}%>
                         <%}%>
                     </tbody>
                 </table>

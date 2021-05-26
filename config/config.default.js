@@ -2,7 +2,7 @@
  * @Author: rzx007
  * @Date: 2021-05-10 10:47:28
  * @LastEditors: rzx007
- * @LastEditTime: 2021-05-18 11:17:42
+ * @LastEditTime: 2021-05-26 12:43:03
  * @FilePath: \init\config\config.default.js
  * @Description: 默认配置
  */
@@ -40,6 +40,7 @@ module.exports = appInfo => {
   config.multipart = {
     mode: 'file',
     tmpdir: path.join(appInfo.baseDir, 'app/public/temp'),
+    fields: '100',
   };
   config.view = {
     mapping: {

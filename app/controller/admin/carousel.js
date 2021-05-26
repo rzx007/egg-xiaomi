@@ -2,7 +2,7 @@
  * @Author: rzx007
  * @Date: 2021-05-14 16:28:21
  * @LastEditors: rzx007
- * @LastEditTime: 2021-05-23 23:24:18
+ * @LastEditTime: 2021-05-26 14:21:50
  * @FilePath: \init\app\controller\admin\carousel.js
  * @Description:轮播图逻辑
  */
@@ -35,6 +35,7 @@ class CarouselController extends Controller {
     console.log(ctx.request.files);
     if (files.length > 0) {
       const pathArr = await ctx.helper.upload(app, files);
+      await ctx.helper.jimpImg(pathArr[0]);
       await ctx.model.Carousel.create({ carousel_img: pathArr[0], ...data });
       await this.success('/admin/carousel', '新增成功');
     }

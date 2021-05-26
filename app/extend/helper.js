@@ -2,7 +2,7 @@
  * @Author: rzx007
  * @Date: 2021-05-09 20:37:43
  * @LastEditors: rzx007
- * @LastEditTime: 2021-05-14 22:51:27
+ * @LastEditTime: 2021-05-26 14:47:20
  * @FilePath: \init\app\extend\helper.js
  * @Description: 一些实用的 utility 函数
  */
@@ -10,7 +10,9 @@
 const moment = require('moment');
 const md5 = require('md5');
 const fs = require('fs');
+const path = require('path');
 const mkdirp = require('mz-modules/mkdirp');
+const Jimp = require('jimp'); // 生成缩略图的模块
 module.exports = {
   formatTime: time => moment(time).format('YYYY-MM-DD hh:mm:ss'), // 时间格式化
   uuid: function uuid() {
@@ -60,6 +62,24 @@ module.exports = {
       filepathArr.push(newFilename);
     }
     return filepathArr;
+  },
+  jimpImg: async target => { // 生成缩略图的公共方法
+    // 上传图片成功以后生成缩略图
+    console.log(path.join(__dirname, '..', '/public', target));
+    const absolutePath = path.join(__dirname, '..', '/public', target);
+    const extname = path.extname(target);
+    console.log(absolutePath);
+    Jimp.read(absolutePath, (err, lenna) => {
+      if (err) throw err;
+      lenna.resize(200, 200) // resize
+        .quality(90) // set JPEG quality
+        .write(absolutePath + '_200x200' + extname); // save
+
+      lenna.resize(400, 400) // resize
+        .quality(90) // set JPEG quality
+        .write(absolutePath + '_400x400' + extname); // save
+    });
+
   },
 };
 // https://www.jianshu.com/p/1484605c523a
