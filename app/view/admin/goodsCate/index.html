@@ -2,7 +2,7 @@
  * @Author: rzx007
  * @Date: 2021-05-23 23:34:11
  * @LastEditors: rzx007
- * @LastEditTime: 2021-05-26 11:47:22
+ * @LastEditTime: 2021-05-28 14:29:48
  * @FilePath: \init\app\view\admin\goodsCate\index.html
  * @Description: Do not edit
 -->
@@ -31,6 +31,7 @@
                     <thead>
                         <tr class="th">
                             <th>商品类型名称</th>
+                            <th>商品略缩图</th>
                             <th>描述</th>
                             <th>增加时间</th>
                             <th class="text-center">状态</th>   
@@ -42,6 +43,9 @@
                             <tr style="background-color: rgb(159, 32, 243);color: #fff;">
                                 <td>
                                     <%=list[i].title%>
+                                </td>
+                                <td>
+                                   <img src=" <%=list[i].cate_img%>_64x64.png" alt="">
                                 </td>
                                 <td>
                                     <%=list[i].description%>
@@ -70,6 +74,9 @@
                                         <%=list[i].items[j].title%>
                                     </td>
                                     <td>
+                                        <img src=" <%=list[i].items[j].cate_img%>_64x64.png" alt="">
+                                     </td>
+                                    <td>
                                         <%=list[i].items[j].description%>
                                     </td>
                                     <td>
@@ -77,14 +84,11 @@
                                     </td>
                                     <td  class="text-center">
                                         <%if(list[i].items[j].status==1){%>
-    
-                                                <img src="/admin/images/yes.gif" onclick="$.changeStatus(this,'GoodsCate','status','<%=list[i]._id%>')" />
-    
+                                            <img src="/admin/images/yes.gif" onclick="$.changeStatus(this,'GoodsCate','status','<%=list[i]._id%>')" />  
                                         <%}else{%>
-                                                <img src="/admin/images/no.gif" onclick="$.changeStatus(this,'GoodsCate','status','<%=list[i]._id%>')" />
+                                            <img src="/admin/images/no.gif" onclick="$.changeStatus(this,'GoodsCate','status','<%=list[i]._id%>')" />
                                         <%}%>
-    
-                                </td>    
+                                    </td>    
                                     <td class="text-center">
                                         <a href="/admin/goodsCate/edit?id=<%=list[i].items[j]._id%>">修改</a>
                                         <a href="/admin/delete?model=GoodsCate&id=<%=list[i].items[j]._id%>">删除</a>

@@ -1,0 +1,57 @@
+<!--
+ * @Author: rzx007
+ * @Date: 2021-05-23 23:34:11
+ * @LastEditors: rzx007
+ * @LastEditTime: 2021-05-28 15:46:02
+ * @FilePath: \init\app\view\admin\goods\index.html
+ * @Description: Do not edit
+-->
+<%- include ../common/page_header.html %>
+
+    <div class=" content">
+        <div class="panel panel-default">
+            <div class="alert alert-secondary">
+                <a href="/admin/goods/add" class="btn btn-primary">增加商品</a>
+            </div>
+            <div class="panel-body">
+                <form role="form" class="row g-2">
+                    <div class="col-auto">
+                        <label for="name" class="visually-hidden">名称</label>
+                        <input type="text" class="form-control" id="name" placeholder="请输入名称">
+                    </div>
+                    <div class="col-auto">
+                        <button type="submit" class="btn btn-primary">开始搜索</button>
+                    </div>
+                </form>
+            </div>
+        </div
+             <!--列表展示 -->
+             <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>                                   
+                    <tr class="th">
+                        <th>商品名称</th>
+                        <th>货号</th>
+                        <th>价格</th>  
+                        <th>点击量</th>
+                        <th>上架</th>
+
+                        <th>精品</th>
+                        <th>新品</th>
+                        <th>热销</th>
+                        <th>推荐排序</th>
+                        <th>库存</th>                             
+                        <th class="text-center">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                            商品列表
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    </body>
+
+    </html>

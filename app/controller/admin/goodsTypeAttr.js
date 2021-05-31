@@ -2,7 +2,7 @@
  * @Author: rzx007
  * @Date: 2021-05-23 14:07:23
  * @LastEditors: rzx007
- * @LastEditTime: 2021-05-23 23:14:52
+ * @LastEditTime: 2021-05-29 18:55:41
  * @FilePath: \init\app\controller\admin\goodsTypeAttr.js
  * @Description: 商品类型属性相关逻辑
  */
@@ -10,7 +10,7 @@
 
 const Controller = require('./baseController.js');
 
-class HomeController extends Controller {
+class GoodsTypeAttrController extends Controller {
   async index() {
     const { ctx, app } = this;
     const cate_id = ctx.query.id;
@@ -56,6 +56,25 @@ class HomeController extends Controller {
     await ctx.model.GoodsTypeAttr.findOneAndUpdate({ _id: row._id }, row);
     await this.success('/admin/goodsTypeAttr?id=' + row.cate_id, '修改商品类型属性成功');
   }
+  async getGoodsTypeAttrByTypeId() { // 通过商品类型查询商品类型的属性 api接口
+    const { ctx, app } = this;
+    const cate_id = ctx.query.id;
+    const match = cate_id ? { cate_id: app.mongoose.Types.ObjectId(cate_id) } : {};
+    const data = await ctx.model.GoodsTypeAttr.aggregate([
+      {
+        $lookup: {
+          from: 'goods_type',
+          localField: 'cate_id',
+          foreignField: '_id',
+          as: 'goods_type',
+        },
+      },
+      {
+        $match: match,
+      },
+    ]);
+    ctx.helper.success({ ctx, data });
+  }
 }
 
-module.exports = HomeController;
+module.exports = GoodsTypeAttrController;

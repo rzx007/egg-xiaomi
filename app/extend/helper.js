@@ -2,7 +2,7 @@
  * @Author: rzx007
  * @Date: 2021-05-09 20:37:43
  * @LastEditors: rzx007
- * @LastEditTime: 2021-05-26 14:47:20
+ * @LastEditTime: 2021-05-28 14:34:46
  * @FilePath: \init\app\extend\helper.js
  * @Description: 一些实用的 utility 函数
  */
@@ -64,22 +64,24 @@ module.exports = {
     return filepathArr;
   },
   jimpImg: async target => { // 生成缩略图的公共方法
-    // 上传图片成功以后生成缩略图
-    console.log(path.join(__dirname, '..', '/public', target));
+    // 上传图片成功以后生成缩略图 支持 bmp gif jpeg png tiff
+    // console.log(path.join(__dirname, '..', '/public', target));
     const absolutePath = path.join(__dirname, '..', '/public', target);
     const extname = path.extname(target);
     console.log(absolutePath);
     Jimp.read(absolutePath, (err, lenna) => {
       if (err) throw err;
+      lenna.resize(64, 64) // resize
+        .quality(10) // set JPEG quality
+        .write(absolutePath + '_64x64' + extname); // save
       lenna.resize(200, 200) // resize
-        .quality(90) // set JPEG quality
+        .quality(100) // set JPEG quality
         .write(absolutePath + '_200x200' + extname); // save
 
       lenna.resize(400, 400) // resize
-        .quality(90) // set JPEG quality
+        .quality(100) // set JPEG quality
         .write(absolutePath + '_400x400' + extname); // save
     });
-
   },
 };
 // https://www.jianshu.com/p/1484605c523a

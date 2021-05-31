@@ -2,7 +2,7 @@
  * @Author: rzx007
  * @Date: 2021-05-11 15:49:56
  * @LastEditors: rzx007
- * @LastEditTime: 2021-05-26 12:57:09
+ * @LastEditTime: 2021-05-28 14:49:17
  * @FilePath: \init\app\view\admin\goodsCate\edit.html
  * @Description: Do not edit
 -->
@@ -29,8 +29,8 @@
                                     <%}%>
                                 </select>
                             </li>  
-                            <li> <span>分类图片:</span>  <input type="file" name="cate_img"/></li>  
-                            <img src="<%=list.cate_img%>" alt="分类图片" width="150">  
+                            <li> <span>分类图片:</span>  <input type="file" name="cate_img" id="uploadImg" /></li>  
+                            <img src="<%=list.cate_img%>_64x64.png" id="img" alt="分类图片" width="90">  
                             <li> <span>筛选属性:</span> <input type="text" value="<%=list.filter_attr%>" name="filter_attr" class="input"/></li> 
                             <li>  <span>跳转地址:</span>  <input type="text" value="<%=list.link%>"  name="link" class="input"/></li> 
                             <li>  <span>分类模板:</span> <input type="text" name="template" value="<%=list.template%>" class="input"/><span>空表示默认模板</span></li>
@@ -60,4 +60,23 @@
 </div>
 
 </body>
+<script>
+    $(function() {
+        $('#uploadImg').change(function(){
+            var file=$(this)[0].files[0]; 
+            if(file.size > 1024 * 1024 * 2) {
+	            alert('图片大小不能超过 2MB!');
+	            return false;
+            }
+            var imgdata='';
+            if(file) {
+                var reader=new FileReader();  //调用FileReader
+                reader.readAsDataURL(file); //将文件读取为 DataURL(base64)
+                reader.onload=function(evt){   //读取操作完成时触发。
+                    $("#img").attr('src',evt.target.result)  //将img标签的src绑定为DataURL
+                };
+            }
+        })
+    })
+</script>
 </html>

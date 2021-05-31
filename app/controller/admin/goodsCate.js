@@ -2,14 +2,13 @@
  * @Author: rzx007
  * @Date: 2021-05-23 23:35:36
  * @LastEditors: rzx007
- * @LastEditTime: 2021-05-26 12:46:19
+ * @LastEditTime: 2021-05-28 15:40:27
  * @FilePath: \init\app\controller\admin\goodsCate.js
  * @Description: 商品分类，参考小米商城首页分类
  */
 'use strict';
 
 const Controller = require('./baseController.js');
-
 class GoodsCateController extends Controller {
   async index() {
     const { ctx } = this;
@@ -24,7 +23,6 @@ class GoodsCateController extends Controller {
       },
       { $match: { pid: '0' } },
     ]);
-    console.log(data[0].items);
     await this.ctx.render('admin/goodsCate/index', { list: data });
   }
   async add() {
@@ -37,7 +35,6 @@ class GoodsCateController extends Controller {
     const { id } = ctx.query;
     const row = await ctx.model.GoodsCate.find({ _id: id });
     const cateList = await ctx.model.GoodsCate.find({ pid: '0' });
-    console.log(row);
     await this.ctx.render('admin/goodsCate/edit', { list: row[0], cateList });
   }
   async addGoods() {
@@ -47,10 +44,11 @@ class GoodsCateController extends Controller {
     if (row.pid !== '0') { // 不是顶级模块，把关联的module_id转为ObjectId类型
       row.pid = app.mongoose.Types.ObjectId(row.pid);
     }
-    console.log(files);
+    // console.log(files);
     if (files.length > 0) {
       const pathArr = await ctx.helper.upload(app, files);
       row.cate_img = pathArr[0];
+      await ctx.helper.jimpImg(pathArr[0]);
     }
     await ctx.model.GoodsCate.create(row);
     await this.success('/admin/goodsCate', '新增商品分类成功');
@@ -62,11 +60,14 @@ class GoodsCateController extends Controller {
     if (files.length > 0) {
       const pathArr = await ctx.helper.upload(app, files);
       row.cate_img = pathArr[0];
+      await ctx.helper.jimpImg(pathArr[0]);
     }
     if (row.pid !== '0') { // 不是顶级模块，把关联的module_id转为ObjectId类型
       row.pid = app.mongoose.Types.ObjectId(row.pid);
     }
-    await ctx.model.GoodsCate.findOneAndUpdate({ _id: row.id }, row);
+    await ctx.model.GoodsCate.updateOne({ _id: row.id }, { $set: row }, (err, raw) => {
+      console.log(raw);
+    });
     await this.success('/admin/goodsCate', '修改商品分类成功');
   }
 }

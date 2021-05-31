@@ -2,7 +2,7 @@
  * @Author: rzx007
  * @Date: 2021-05-08 12:39:10
  * @LastEditors: rzx007
- * @LastEditTime: 2021-05-23 23:45:36
+ * @LastEditTime: 2021-05-29 18:54:37
  * @FilePath: \init\app\router\admin.js
  * @Description: 后台路由接口
  */
@@ -65,10 +65,18 @@ module.exports = app => {
   router.post('/admin/goodsTypeAttr/addGoods', controller.admin.goodsTypeAttr.addGoods);
   router.post('/admin/goodsTypeAttr/updateGoods', controller.admin.goodsTypeAttr.updateGoods);
 
-  // 商品分类
+  // 商品分类，参考小米首页得分类
   router.get('/admin/goodsCate', controller.admin.goodsCate.index);
   router.get('/admin/goodsCate/add', controller.admin.goodsCate.add);
   router.get('/admin/goodsCate/edit', controller.admin.goodsCate.edit);
   router.post('/admin/goodsCate/addGoods', controller.admin.goodsCate.addGoods);
   router.post('/admin/goodsCate/updateGoods', controller.admin.goodsCate.updateGoods);
+
+  // 商品
+  router.get('/admin/goods', controller.admin.goods.index);
+  router.get('/admin/goods/add', controller.admin.goods.add);
+  router.get('/admin/goods/edit', controller.admin.goods.edit);
+  router.post('/admin/goods/addGoods', controller.admin.goods.addGoods);
+  router.post('/admin/goods/updateGoods', controller.admin.goods.updateGoods);
+  router.get('/admin/goodsTypeAttr/getGoodsTypeAttrByTypeId', controller.admin.goodsTypeAttr.getGoodsTypeAttrByTypeId);
 };
