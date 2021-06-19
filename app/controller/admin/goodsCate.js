@@ -2,7 +2,7 @@
  * @Author: rzx007
  * @Date: 2021-05-23 23:35:36
  * @LastEditors: rzx007
- * @LastEditTime: 2021-05-28 15:40:27
+ * @LastEditTime: 2021-06-20 00:46:52
  * @FilePath: \init\app\controller\admin\goodsCate.js
  * @Description: 商品分类，参考小米商城首页分类
  */
@@ -48,7 +48,7 @@ class GoodsCateController extends Controller {
     if (files.length > 0) {
       const pathArr = await ctx.helper.upload(app, files);
       row.cate_img = pathArr[0];
-      await ctx.helper.jimpImg(pathArr[0]);
+      await ctx.helper.jimpImg(pathArr[0]); // 生成略缩图
     }
     await ctx.model.GoodsCate.create(row);
     await this.success('/admin/goodsCate', '新增商品分类成功');

@@ -2,7 +2,7 @@
  * @Author: rzx007
  * @Date: 2021-05-28 15:35:50
  * @LastEditors: rzx007
- * @LastEditTime: 2021-05-28 17:52:53
+ * @LastEditTime: 2021-06-20 01:50:44
  * @FilePath: \init\app\controller\admin\goods.js
  * @Description: 商品
  */
@@ -28,9 +28,20 @@ class GoodsController extends Controller {
   }
   async add() {
     const { ctx } = this;
-    const colorList = await ctx.model.GoodsColor.find();
-    const typeList = await ctx.model.GoodsType.find();
-    await ctx.render('admin/goods/add', { colorList, typeList });
+    const colorList = await ctx.model.GoodsColor.find(); // 商品颜色列表
+    const typeList = await ctx.model.GoodsType.find(); // 商品类型列表（goods_type）
+    const goodsCate = await ctx.model.GoodsCate.aggregate([
+      {
+        $lookup: {
+          from: 'goods_cate',
+          localField: '_id',
+          foreignField: 'pid',
+          as: 'items',
+        },
+      },
+      { $match: { pid: '0' } },
+    ]);
+    await ctx.render('admin/goods/add', { colorList, typeList, goodsCate });
   }
   async edit() {
     const { ctx } = this;
@@ -45,6 +56,24 @@ class GoodsController extends Controller {
   }
   async updateGoods() {
     const { ctx, app } = this;
+  }
+  async uploadImg() { // 富文本编辑器文件上传
+    const { ctx, app } = this;
+    const files = ctx.request.files;
+    console.log(files);
+    const pathArr = await ctx.helper.upload(app, files);
+    ctx.body = { link: pathArr[0] }; // wysiwyg插件文件上传返回的特殊格式
+  }
+  async goodsUploadPhoto() { // 多文件上传,商品相册图片
+    const { ctx, app } = this;
+    const files = ctx.request.files;
+    console.log(files);
+    const pathArr = await ctx.helper.upload(app, files);
+    for (let index = 0; index < pathArr.length; index++) {
+      const element = pathArr[index];
+      await ctx.helper.jimpImg(element); // 生成略缩图
+    }
+    ctx.helper.success({ ctx, data: pathArr });
   }
 }
 

@@ -2,7 +2,7 @@
  * @Author: rzx007
  * @Date: 2021-05-10 10:47:28
  * @LastEditors: rzx007
- * @LastEditTime: 2021-05-28 14:57:03
+ * @LastEditTime: 2021-06-20 01:51:04
  * @FilePath: \init\config\config.default.js
  * @Description: 默认配置
  */
@@ -45,6 +45,16 @@ module.exports = appInfo => {
   config.view = {
     mapping: {
       '.html': 'ejs',
+    },
+  };
+  config.security = {
+    csrf: {
+      ignore: ctx => {
+        if (ctx.request.url === '/admin/goods/uploadImg'||ctx.request.url === '/admin/goods/goodsUploadPhoto') {
+          return true;
+        }
+        return false;
+      },
     },
   };
   // token密钥

@@ -2,7 +2,7 @@
  * @Author: rzx007
  * @Date: 2021-05-09 20:37:43
  * @LastEditors: rzx007
- * @LastEditTime: 2021-05-28 14:34:46
+ * @LastEditTime: 2021-06-20 00:50:43
  * @FilePath: \init\app\extend\helper.js
  * @Description: 一些实用的 utility 函数
  */
@@ -68,7 +68,7 @@ module.exports = {
     // console.log(path.join(__dirname, '..', '/public', target));
     const absolutePath = path.join(__dirname, '..', '/public', target);
     const extname = path.extname(target);
-    console.log(absolutePath);
+    // console.log(absolutePath);
     Jimp.read(absolutePath, (err, lenna) => {
       if (err) throw err;
       lenna.resize(64, 64) // resize
