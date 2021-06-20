@@ -2,7 +2,7 @@
  * @Author: rzx007
  * @Date: 2021-05-23 23:35:36
  * @LastEditors: rzx007
- * @LastEditTime: 2021-06-20 00:46:52
+ * @LastEditTime: 2021-06-21 00:41:52
  * @FilePath: \init\app\controller\admin\goodsCate.js
  * @Description: 商品分类，参考小米商城首页分类
  */
@@ -39,33 +39,28 @@ class GoodsCateController extends Controller {
   }
   async addGoods() {
     const { ctx, app } = this;
-    const row = ctx.request.body;
-    const files = ctx.request.files;
-    if (row.pid !== '0') { // 不是顶级模块，把关联的module_id转为ObjectId类型
-      row.pid = app.mongoose.Types.ObjectId(row.pid);
+    const { filepathArr, body } = await ctx.helper.uploadStream(app, ctx);
+    if (body.pid !== '0') { // 不是顶级模块，把关联的module_id转为ObjectId类型
+      body.pid = app.mongoose.Types.ObjectId(body.pid);
     }
     // console.log(files);
-    if (files.length > 0) {
-      const pathArr = await ctx.helper.upload(app, files);
-      row.cate_img = pathArr[0];
-      await ctx.helper.jimpImg(pathArr[0]); // 生成略缩图
+    if (filepathArr.length > 0) {
+      await ctx.helper.jimpImg(filepathArr[0]); // 生成略缩图
     }
-    await ctx.model.GoodsCate.create(row);
+    await ctx.model.GoodsCate.create(body);
     await this.success('/admin/goodsCate', '新增商品分类成功');
   }
   async updateGoods() {
     const { ctx, app } = this;
-    const row = ctx.request.body;
-    const files = ctx.request.files;
-    if (files.length > 0) {
-      const pathArr = await ctx.helper.upload(app, files);
-      row.cate_img = pathArr[0];
-      await ctx.helper.jimpImg(pathArr[0]);
+    const { filepathArr, body } = await ctx.helper.uploadStream(app, ctx);
+    console.log(body);
+    if (filepathArr.length > 0) {
+      await ctx.helper.jimpImg(filepathArr[0]);
     }
-    if (row.pid !== '0') { // 不是顶级模块，把关联的module_id转为ObjectId类型
-      row.pid = app.mongoose.Types.ObjectId(row.pid);
+    if (body.pid !== '0') { // 不是顶级模块，把关联的module_id转为ObjectId类型
+      body.pid = app.mongoose.Types.ObjectId(body.pid[0]);
     }
-    await ctx.model.GoodsCate.updateOne({ _id: row.id }, { $set: row }, (err, raw) => {
+    await ctx.model.GoodsCate.updateOne({ _id: body.id }, { $set: body }, (err, raw) => {
       console.log(raw);
     });
     await this.success('/admin/goodsCate', '修改商品分类成功');

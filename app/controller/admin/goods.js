@@ -2,7 +2,7 @@
  * @Author: rzx007
  * @Date: 2021-05-28 15:35:50
  * @LastEditors: rzx007
- * @LastEditTime: 2021-06-20 01:50:44
+ * @LastEditTime: 2021-06-21 00:14:19
  * @FilePath: \init\app\controller\admin\goods.js
  * @Description: 商品
  */
@@ -52,28 +52,25 @@ class GoodsController extends Controller {
   }
   async addGoods() {
     const { ctx, app } = this;
-    console.log(ctx.request.body);
+    const files = await ctx.helper.uploadStream(app, ctx);
+    console.log(files);
   }
   async updateGoods() {
     const { ctx, app } = this;
   }
   async uploadImg() { // 富文本编辑器文件上传
     const { ctx, app } = this;
-    const files = ctx.request.files;
-    console.log(files);
-    const pathArr = await ctx.helper.upload(app, files);
-    ctx.body = { link: pathArr[0] }; // wysiwyg插件文件上传返回的特殊格式
+    const { filepathArr } = await ctx.helper.uploadStream(app, ctx);
+    ctx.body = { link: filepathArr[0] }; // wysiwyg插件文件上传返回的特殊格式
   }
   async goodsUploadPhoto() { // 多文件上传,商品相册图片
     const { ctx, app } = this;
-    const files = ctx.request.files;
-    console.log(files);
-    const pathArr = await ctx.helper.upload(app, files);
-    for (let index = 0; index < pathArr.length; index++) {
-      const element = pathArr[index];
+    const { filepathArr } = await ctx.helper.uploadStream(app, ctx);
+    for (let index = 0; index < filepathArr.length; index++) {
+      const element = filepathArr[index];
       await ctx.helper.jimpImg(element); // 生成略缩图
     }
-    ctx.helper.success({ ctx, data: pathArr });
+    ctx.helper.success({ ctx, data: filepathArr });
   }
 }
 

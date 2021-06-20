@@ -2,7 +2,7 @@
  * @Author: rzx007
  * @Date: 2021-05-10 10:47:28
  * @LastEditors: rzx007
- * @LastEditTime: 2021-06-20 01:51:04
+ * @LastEditTime: 2021-06-20 23:57:27
  * @FilePath: \init\config\config.default.js
  * @Description: 默认配置
  */
@@ -38,7 +38,7 @@ module.exports = appInfo => {
   };
   // 文件上传
   config.multipart = {
-    mode: 'file',
+    // mode: 'file',
     tmpdir: path.join(appInfo.baseDir, 'app/public/temp'),
     fields: '100', // 默认表单提交得长度为10
   };
@@ -50,7 +50,7 @@ module.exports = appInfo => {
   config.security = {
     csrf: {
       ignore: ctx => {
-        if (ctx.request.url === '/admin/goods/uploadImg'||ctx.request.url === '/admin/goods/goodsUploadPhoto') {
+        if (ctx.request.url === '/admin/goods/uploadImg' || ctx.request.url === '/admin/goods/goodsUploadPhoto') {
           return true;
         }
         return false;

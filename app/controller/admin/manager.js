@@ -73,17 +73,9 @@ class ManagerController extends Controller {
   }
   async upload() {
     const { ctx, app } = this;
-    const files = ctx.request.files;
-    let pathArr = [];
-    try {
-      // 处理文件，比如上传到云端
-      pathArr = await ctx.helper.upload(app, files);
-    } finally {
-      // 需要删除临时文件
-    }
-
+    const { filepathArr } = await ctx.helper.uploadStream(app, ctx);
     ctx.body = {
-      url: pathArr,
+      url: filepathArr,
       // 获取所有的字段值
       requestBody: ctx.request.body,
     };

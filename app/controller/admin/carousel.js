@@ -2,7 +2,7 @@
  * @Author: rzx007
  * @Date: 2021-05-14 16:28:21
  * @LastEditors: rzx007
- * @LastEditTime: 2021-05-26 14:21:50
+ * @LastEditTime: 2021-06-21 00:49:13
  * @FilePath: \init\app\controller\admin\carousel.js
  * @Description:轮播图逻辑
  */
@@ -29,27 +29,24 @@ class CarouselController extends Controller {
   }
   async addCarousel() {
     const { ctx, app } = this;
-    console.log(ctx.request.body);
-    const data = ctx.request.body;
-    const files = ctx.request.files;
-    console.log(ctx.request.files);
-    if (files.length > 0) {
-      const pathArr = await ctx.helper.upload(app, files);
-      await ctx.helper.jimpImg(pathArr[0]);
-      await ctx.model.Carousel.create({ carousel_img: pathArr[0], ...data });
+    const { filepathArr, body } = await ctx.helper.uploadStream(app, ctx);
+    if (filepathArr.length > 0) {
+      await ctx.helper.jimpImg(filepathArr[0]);
+      await ctx.model.Carousel.create({ carousel_img: filepathArr[0], ...body });
       await this.success('/admin/carousel', '新增成功');
+    } else {
+      await this.error('/admin/carousel', '请添加轮播图片');
     }
+
   }
   async updateCarousel() {
     const { ctx, app } = this;
-    let params = ctx.request.body;
-    const files = ctx.request.files;
-    if (files.length > 0) {
-      const pathArr = await ctx.helper.upload(app, files);
-      params = Object.assign({}, params, { carousel_img: pathArr[0] });
+    let { filepathArr, body } = await ctx.helper.uploadStream(app, ctx);
+    if (filepathArr.length > 0) {
+      body = Object.assign({}, body, { carousel_img: filepathArr[0] });
     }
-    await ctx.model.Carousel.updateOne({ _id: params.id }, params);
-
+    console.log(body);
+    await ctx.model.Carousel.updateOne({ _id: body.id }, body);
     await this.success('/admin/carousel', '修改轮播图成功');
   }
 }

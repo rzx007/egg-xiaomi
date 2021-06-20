@@ -2,7 +2,7 @@
  * @Author: rzx007
  * @Date: 2021-05-09 20:37:43
  * @LastEditors: rzx007
- * @LastEditTime: 2021-06-20 00:50:43
+ * @LastEditTime: 2021-06-21 00:51:36
  * @FilePath: \init\app\extend\helper.js
  * @Description: 一些实用的 utility 函数
  */
@@ -12,6 +12,7 @@ const md5 = require('md5');
 const fs = require('fs');
 const path = require('path');
 const mkdirp = require('mz-modules/mkdirp');
+const pump = require('mz-modules/pump');
 const Jimp = require('jimp'); // 生成缩略图的模块
 module.exports = {
   formatTime: time => moment(time).format('YYYY-MM-DD hh:mm:ss'), // 时间格式化
@@ -62,6 +63,33 @@ module.exports = {
       filepathArr.push(newFilename);
     }
     return filepathArr;
+  },
+  uploadStream: async (app, ctx, temp) => {
+    // 1. 创建文件夹
+    const day = moment().format('YYYYMMDD') + '\\';
+    const basePath = app.config.baseDir + '\\app\\public';
+    const tempPath = '\\' + (temp || 'file\\') + day;
+    await mkdirp(basePath + tempPath);
+    const parts = ctx.multipart({ autoFields: true });
+    let files = {},
+      stream;
+    const filepathArr = [];
+    while ((stream = await parts()) != null) {
+      if (!stream.filename) {
+        break;
+      }
+      const newFilename = tempPath + Math.random(10).toString(36) + new Date().getTime() + '.' + stream.filename.split('.').pop();
+      const newFilepath = `${basePath}${newFilename}`;
+      const fieldname = stream.fieldname; // file表单的名字
+      const writeStream = fs.createWriteStream(newFilepath);
+      await pump(stream, writeStream); // 释放流
+      files = Object.assign(files, { [fieldname]: newFilename });
+      filepathArr.push(newFilename);
+    }
+    return {
+      body: Object.assign(files, parts.field),
+      filepathArr,
+    };
   },
   jimpImg: async target => { // 生成缩略图的公共方法
     // 上传图片成功以后生成缩略图 支持 bmp gif jpeg png tiff
