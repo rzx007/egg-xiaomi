@@ -1,9 +1,9 @@
 /*
  * @Author: rzx007
  * @Date: 2021-05-08 12:39:10
- * @LastEditors: rzx007
- * @LastEditTime: 2021-06-20 00:34:47
- * @FilePath: \init\app\router\admin.js
+ * @LastEditors: 阮志雄
+ * @LastEditTime: 2021-11-16 17:25:39
+ * @FilePath: \egg-xiaomi\app\router\admin.js
  * @Description: 后台路由接口
  */
 
@@ -49,6 +49,7 @@ module.exports = app => {
   router.get('/admin/carousel/add', controller.admin.carousel.add);
   router.get('/admin/carousel/edit', controller.admin.carousel.edit);
   router.post('/admin/carousel/addCarousel', controller.admin.carousel.addCarousel);
+  router.post('/admin/carousel/addFile', controller.admin.carousel.addFile);
   router.post('/admin/carousel/updateCarousel', controller.admin.carousel.updateCarousel);
 
   // 商品类型

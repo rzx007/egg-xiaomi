@@ -1,3 +1,11 @@
+/*
+ * @Author: 阮志雄
+ * @Date: 2021-07-06 15:31:53
+ * @LastEditTime: 2021-08-04 17:56:51
+ * @LastEditors: 阮志雄
+ * @Description: In User Settings Edit
+ * @FilePath: \egg-xiaomi\app\controller\admin\access.js
+ */
 
 'use strict';
 
@@ -63,3 +71,6 @@ class RoleController extends Controller {
 }
 
 module.exports = RoleController;
+
+// https://www.jianshu.com/p/eaf51d9e3630
+// https://www.cnblogs.com/fengting0913/p/14616629.html

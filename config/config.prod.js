@@ -1,18 +1,9 @@
-/*
- * @Author: rzx007
- * @Date: 2021-05-10 10:47:28
- * @LastEditors: 阮志雄
- * @LastEditTime: 2022-01-15 15:06:02
- * @FilePath: \egg-xiaomi\config\config.default.js
- * @Description: 默认配置
- */
 'use strict';
 /**
  * @param {Egg.EggAppInfo} appInfo app info
  */
 
 const path = require('path');
-const ignore = [ '/admin/carousel/addFile', '/admin/goods/uploadImg', '/admin/goods/goodsUploadPhoto' ];
 module.exports = appInfo => {
   /**
    * built-in config
@@ -51,7 +42,7 @@ module.exports = appInfo => {
   config.security = {
     csrf: {
       ignore: ctx => {
-        if (ignore.includes(ctx.request.url)) {
+        if (ctx.request.url === '/admin/goods/uploadImg' || ctx.request.url === '/admin/goods/goodsUploadPhoto') {
           return true;
         }
         return false;
@@ -63,7 +54,7 @@ module.exports = appInfo => {
     cert: 'huanggegehaoshuai', // jwt秘钥
   };
   // add your middleware config here
-  // config.middleware = [ 'auth', 'errorHandler' ];
+  config.middleware = [ 'auth', 'errorHandler' ];
   // 只对 /api 前缀的 url 路径生效
   config.errorHandler = {
     // match: '/api',

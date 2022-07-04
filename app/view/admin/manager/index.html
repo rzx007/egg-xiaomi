@@ -1,9 +1,9 @@
 <!--
  * @Author: rzx007
  * @Date: 2021-05-10 22:13:51
- * @LastEditors: rzx007
- * @LastEditTime: 2021-05-16 20:55:04
- * @FilePath: \init\app\view\admin\manager\index.html
+ * @LastEditors: 阮志雄
+ * @LastEditTime: 2021-07-26 14:15:11
+ * @FilePath: \egg-xiaomi\app\view\admin\manager\index.html
  * @Description: Do not edit
 -->
 <%- include ../common/page_header.html %>
@@ -23,9 +23,7 @@
             </form>
         </div>
     </div>
-    <!--
-        列表展示
-    -->
+    <!-- 列表展示 -->
     <div class="table-responsive">
         <table class="table table-bordered">
             <thead>
@@ -44,7 +42,7 @@
                 <td><%=list[i].username%></td>
                 <td><%=list[i].mobile%></td>
                 <td><%=list[i].email%></td>
-                <td><%=list[i].role[0].title%></td>
+                <td></td>
                 <td  class="text-center">
                     <%if(list[i].status==1){%>
                         <img src="/admin/images/yes.gif" onclick="$.changeStatus(this,'Admin','status','<%=list[i]._id%>', 0)" />

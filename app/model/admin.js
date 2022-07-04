@@ -18,5 +18,5 @@ module.exports = app => {
     is_super: { type: Number, default: 0 },
   });
 
-  return mongoose.model('Admin', UserSchema);
+  return mongoose.model('Admin', UserSchema, 'Admin'); // (模型名称， 模型， 表名称)
 };

@@ -1,9 +1,9 @@
 /*
  * @Author: rzx007
  * @Date: 2021-05-07 23:36:17
- * @LastEditors: rzx007
- * @LastEditTime: 2021-05-16 16:12:23
- * @FilePath: \init\app\controller\admin\login.js
+ * @LastEditors: 阮志雄
+ * @LastEditTime: 2022-01-15 13:35:30
+ * @FilePath: \egg-xiaomi\app\controller\admin\login.js
  * @Description: 登录登出逻辑
  */
 'use strict';

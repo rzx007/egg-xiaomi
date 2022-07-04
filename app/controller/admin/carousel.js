@@ -1,9 +1,9 @@
 /*
  * @Author: rzx007
  * @Date: 2021-05-14 16:28:21
- * @LastEditors: rzx007
- * @LastEditTime: 2021-06-21 00:49:13
- * @FilePath: \init\app\controller\admin\carousel.js
+ * @LastEditors: 阮志雄
+ * @LastEditTime: 2021-11-16 17:33:15
+ * @FilePath: \egg-xiaomi\app\controller\admin\carousel.js
  * @Description:轮播图逻辑
  */
 'use strict';
@@ -26,6 +26,12 @@ class CarouselController extends Controller {
     const data = await ctx.model.Carousel.find({ _id: id });
     // console.log(data);
     await ctx.render('admin/carousel/edit', { list: data[0] });
+  }
+  async addFile() {
+    const { ctx, app } = this;
+    const { filepathArr, body } = await ctx.helper.uploadStream(app, ctx);
+    console.log(filepathArr, body);
+    ctx.body = { id: 12 };
   }
   async addCarousel() {
     const { ctx, app } = this;
